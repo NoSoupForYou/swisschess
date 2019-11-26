@@ -26,8 +26,8 @@ def assign_colors(pairing):
     top_player_plays_white = random() < 0.5
     flip_index = 0 if top_player_plays_white else 1
     logging.info(
-        "Top-rated player is " + ("" if top_player_plays_white else "not ") + \
-        "playing white")
+        "Top-rated player is {}playing white".format(
+            "" if top_player_plays_white else "not "))
 
     for i, pair in enumerate(pairing):
         if i % 2 == flip_index:
@@ -45,9 +45,10 @@ def assign_colors(pairing):
 def pair_field(filename):
     """Pair the participants in the CSV pointed to by filename
 
-    For now, we're assuming the field hasn't been properly ranked, and that no player
-    yet has ratings, so we'll randomize their order upon read. However, from this point
-    on, we'll assume each player's pairing number has been assigned according to rank."""
+    For now, we're assuming the field hasn't been properly ranked, and that no
+    player yet has ratings, so we'll randomize their order upon read. However,
+    from this point on, we'll assume each player's pairing number has been
+    assigned according to rank."""
 
     with open(filename) as f:
         field = list(map(tuple, csv_reader(f)))
@@ -56,8 +57,8 @@ def pair_field(filename):
 
     min_rounds = ceil(log(len(random_field), 2))
     logging.info((
-        f"Read {len(random_field)} participants from {filename}. Will run at least "
-        f"{min_rounds} rounds"))
+        f"Read {len(random_field)} participants from {filename}. Will run at "
+        f"least {min_rounds} rounds"))
 
     first_half = random_field[:len(random_field) // 2]
     second_half = random_field[len(random_field) // 2:]
@@ -71,6 +72,7 @@ def pair_field(filename):
         logging.info(f"Initial pairing: {pairing}")
 
     color_pairs = list(assign_colors(pairing))
+    print(color_pairs)
 
 
 def main(argv=None):
