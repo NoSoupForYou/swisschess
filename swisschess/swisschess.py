@@ -71,8 +71,7 @@ def pair_field(filename):
     else:
         logging.info(f"Initial pairing: {pairing}")
 
-    color_pairs = list(assign_colors(pairing))
-    print(color_pairs)
+    return list(assign_colors(pairing))
 
 
 def main(argv=None):
